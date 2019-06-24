@@ -1,0 +1,19 @@
+[Unit]
+Description=Reboot after Ignition to apply kargs
+Documentation=https://github.com/coreos/ignition-dracut
+DefaultDependencies=false
+# Before=initrd-switch-root.target
+Before=ignition-complete.target
+
+OnFailure=emergency.target
+OnFailureJobMode=isolate
+
+Requires=ignition-mount.service
+After=ignition-files.service
+# Requires=ostree-finalize-staged.service
+# After=ostree-finalize-staged.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/ignition-apply-kargs
