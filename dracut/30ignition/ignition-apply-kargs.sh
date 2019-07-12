@@ -63,11 +63,11 @@ reboot_if_kargs_dir_exists() {
     local REFSPEC=( $(ostree refs --repo /sysroot/ostree/repo) )
 
     if [ -d /sysroot/etc/ostree/kargs.d ]; then
-        local kargs=$(cat /sysroot/etc/ostree/kargs.d/testfile)
-        # ostree admin --sysroot=/sysroot --os=fcos deploy ${REFSPEC}
-        echo "ls /sysroot/ostree/deploy/fedora-coreos/deploy: $(ls /sysroot/ostree/deploy/fedora-coreos/deploy)"
-        cp -r /sysroot/ostree/deploy/fedora-coreos/deploy/* /sysroot/ostree/deploy/
-        ostree admin -v --sysroot=/sysroot instutil set-kargs --replace ${kargs}
+        # local kargs=$(cat /sysroot/etc/ostree/kargs.d/testfile)
+        ostree admin --sysroot=/sysroot --os=fcos deploy ${REFSPEC}
+        # echo "ls /sysroot/ostree/deploy/fedora-coreos/deploy: $(ls /sysroot/ostree/deploy/fedora-coreos/deploy)"
+        # cp -r /sysroot/ostree/deploy/fedora-coreos/deploy/* /sysroot/ostree/deploy/
+        # ostree admin -v --sysroot=/sysroot instutil set-kargs --replace ${kargs}
         exec systemctl reboot
     fi
 }
