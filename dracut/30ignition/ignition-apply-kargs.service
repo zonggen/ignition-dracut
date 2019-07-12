@@ -12,6 +12,7 @@ OnFailureJobMode=isolate
 # After=ignition-files.service
 Requires=ostree-prepare-root.service
 After=ostree-prepare-root.service
+After=ignition-files.service
 
 [Service]
 Type=oneshot
