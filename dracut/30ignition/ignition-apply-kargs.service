@@ -2,8 +2,8 @@
 Description=Reboot after Ignition to apply kargs
 Documentation=https://github.com/coreos/ignition-dracut
 DefaultDependencies=false
-Before=initrd-switch-root.target
-# Before=ignition-complete.target
+# Before=initrd-switch-root.target
+Before=ignition-complete.target
 
 OnFailure=emergency.target
 OnFailureJobMode=isolate
