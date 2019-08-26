@@ -17,7 +17,10 @@ RemainAfterExit=yes
 # detected this file. Fail if we are unable to remove it, rather than risking
 # rerunning Ignition at next boot.
 MountFlags=slave
-ExecStart=/bin/sh -c 'mount -o remount,rw /boot && rm /boot/ignition.firstboot'
+ExecStart=/bin/sh -c 'mount -o remount,rw /boot && \
+          sed -i "s/ignition.platform.id=.* /ignition.platform.id=${platform_id} /" /boot/loader/entries/*.conf && \
+          sed -i "s/ignition.platform.id=.* /ignition.platform.id=${platform_id} /" /proc/cmdline && \
+          rm /boot/ignition.firstboot'
 
 [Install]
 WantedBy=multi-user.target
